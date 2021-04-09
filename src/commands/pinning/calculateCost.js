@@ -1,4 +1,3 @@
-import stream from 'stream';
 import { validateEthofsOptions } from '../../util/validators';
 
 export default function calculateCost(readStream, options) {
@@ -25,10 +24,6 @@ export default function calculateCost(readStream, options) {
     return new Promise((resolve, reject) => {
 
         var totalSize = 0;
-
-        if (!(readStream instanceof stream.Readable)) {
-            reject(new Error('readStream is not a readable stream'));
-        }
 
         readStream.on('readable', () => {
             let chunk;
