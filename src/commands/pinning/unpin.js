@@ -1,12 +1,19 @@
 import { baseUrl, controllerContractAddress, controllerABI } from './../../constants';
-import { validateEthofsKey } from '../../util/validators';
+import { validateKeyExists, validateEthofsKey } from '../../util/validators';
 import Web3 from 'web3';
 
 export default function unpin(ethofsKey, hostingContractAddress) {
 
-    var web3 = new Web3(`${baseUrl}`);
+    var web3;
 
-    validateEthofsKey(ethofsKey);
+    if (validateKeyExists) {
+        web3 = new Web3(`${baseUrl}`);
+        validateEthofsKey(ethofsKey);
+    } else {
+        if (window.web3) {
+            web3 = new Web3(web3.currentProvider);
+        }
+    }
 
     if (!hostingContractAddress) {
         throw new Error('hostingContractAddress value is required for removing an upload contract from ethoFS');

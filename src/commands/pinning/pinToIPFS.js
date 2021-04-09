@@ -4,7 +4,7 @@ import stream from 'stream';
 import { validateEthofsKey, validateEthofsData, validateEthofsOptions } from '../../util/validators';
 import Web3 from 'web3';
 
-export default function pinFileToIPFS(ethofsKey, readStream, options) {
+export default function pinToIPFS(ethofsKey, readStream, options) {
 
     var web3 = new Web3(`${baseUrl}`);
     var minimumContractCost = 10000000000000000;

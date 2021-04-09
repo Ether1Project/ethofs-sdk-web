@@ -1,10 +1,11 @@
 {
   "name": "@ethofs/sdk",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Official SDK for the ethoFS Platform",
   "main": "lib/ethofs-sdk.js",
   "scripts": {
     "build": "webpack --env dev && webpack --env build && npm run test",
+    "build-lite": "webpack --env dev && webpack --env build",
     "coverage": "jest --coverage",
     "dev": "webpack --progress --colors --watch --env dev",
     "html": "open coverage/index.html",
@@ -51,6 +52,7 @@
     "yargs": "^10.0.3"
   },
   "dependencies": {
+    "async_hooks": "^1.0.0",
     "axios": "^0.18.1",
     "base-path-converter": "^1.0.2",
     "bl": "^4.0.3",

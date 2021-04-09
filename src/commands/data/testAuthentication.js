@@ -1,21 +1,35 @@
 import { baseUrl, controllerContractAddress, controllerABI } from './../../constants';
-import {validateEthofsKey} from '../../util/validators';
+import { validateEthofsKey } from '../../util/validators';
 import Web3 from 'web3';
 
 export default function testAuthentication(ethofsKey) {
-    validateEthofsKey(ethofsKey);
 
-    //  test authentication to make sure that the user's provided keys are legit
+    var web3;
+    var account;
+
     const endpoint = `${baseUrl}`;
 
-    return new Promise((resolve, reject) => {
+    console.log(ethofsKey);
 
-        var web3 = new Web3(endpoint);
+    validateEthofsKey(ethofsKey);
+
+    if (typeof ethofsKey === 'string') {
+        web3 = new Web3(endpoint);
+        account = web3.eth.accounts.privateKeyToAccount('0x' + ethofsKey);
+
+    } else if (ethofsKey) {
+        web3 = new Web3(ethofsKey);
+        ethofsKey.enable();
+        account = ethofsKey.selectedAddress;
+    } else {
+        throw new Error('No ethoFS key or web3 provider detected');
+    }
+
+    return new Promise((resolve, reject) => {
 
         web3.eth.net.isListening()
             .then(function () {
 
-                var account = web3.eth.accounts.privateKeyToAccount('0x' + ethofsKey);
                 var ethoFSAccounts = new web3.eth.Contract(controllerABI, controllerContractAddress);
 
                 web3.eth.accounts.wallet.add(account);

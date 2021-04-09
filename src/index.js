@@ -1,6 +1,6 @@
 import pinByHash from './commands/pinning/pinByHash';
-import pinFileToIPFS from './commands/pinning/pinFileToIPFS';
-import pinFromFS from './commands/pinning/pinFromFS';
+import pinToIPFS from './commands/pinning/pinToIPFS';
+//import pinFromFS from './commands/pinning/pinFromFS';
 import unpin from './commands/pinning/unpin';
 import extendPin from './commands/pinning/extendPin';
 import testAuthentication from './commands/data/testAuthentication';
@@ -16,12 +16,12 @@ export default function ethofsClient(ethofsKey) {
     client.pinByHash = function (hashToPin, options) {
         return pinByHash(ethofsKey, hashToPin, options);
     };
-    client.pinFileToIPFS = function (readableStream, options) {
-        return pinFileToIPFS(ethofsKey, readableStream, options);
+    client.pinToIPFS = function (readableStream, options) {
+        return pinToIPFS(ethofsKey, readableStream, options);
     };
-    client.pinFromFS = function (sourcePath, options) {
-        return pinFromFS(ethofsKey, sourcePath, options);
-    };
+//    client.pinFromFS = function (sourcePath, options) {
+//        return pinFromFS(ethofsKey, sourcePath, options);
+//    };
     client.unpin = function (uploadContractAddress) {
         return unpin(ethofsKey, uploadContractAddress);
     };
